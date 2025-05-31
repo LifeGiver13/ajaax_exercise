@@ -1,0 +1,24 @@
+* {
+    padding: 2px;
+}
+
+#club_name {
+    background-color: cornsilk;
+    margin: 40px 450px;
+}
+
+input {
+    border-radius: 30px;
+
+}
+
+label {
+    text-decoration: double;
+}
+
+#content {
+    background-image: url(/static/images/me.jpeg);
+    height: auto;
+    width: 180vh;
+
+}

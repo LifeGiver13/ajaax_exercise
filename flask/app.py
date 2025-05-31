@@ -22,6 +22,11 @@ def update_data(id):
         data = request.get_json()
         name = data.get('name')
         handle = data.get('handle')
+        status = data.get('status')
+        role = data.get('role')
+        firstName = data.get('firstName')
+        lastName = data.get('lastName')
+        adminStatus = data.get('adminStatus')
 
         with open('club.json', 'r') as club:
             club_json = json.load(club)
@@ -31,7 +36,15 @@ def update_data(id):
                 if club and str(club.get('id')) == str(id):
                     club['name'] = name
                     club['handle'] = handle
-                    break
+                    club['status'] = status
+
+                    userInfo = club['admins'][0]
+                    userInfo['role'] = role
+                    userInfo['status'] = adminStatus
+
+                    userProfile = userInfo['user']['profile']
+                    userProfile['firstName'] = firstName
+                    userProfile['lastName'] = lastName
 
         with open('club.json', 'w') as club:
             json.dump(club_json, club, indent=4)
@@ -40,7 +53,12 @@ def update_data(id):
             {
                 'message': "Success Updating info",
                 'name': name,
-                'handle': handle
+                'handle': handle,
+                'status': status,
+                'role': role,
+                'admin_status': adminStatus,
+                'firstName': firstName,
+                'lastName': lastName
             })
 
 

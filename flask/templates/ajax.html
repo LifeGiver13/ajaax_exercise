@@ -3,61 +3,117 @@
 
 <head>
     <title> Ajax Template</title>
+    <meta charset="UTF-8">
+    <link href="/static/css/styles.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-    <form onsubmit="ajaxCall(event)">
-        <p>
-            <label for="name">UserName</label>
-            <input type="text" id="name" name="name" required>
-        </p>
-        <p><label for="handle">Handle</label>
-            <input id="handle" id="handle" name="handle" required>
-        </p>
-        <input type="submit" name="submit" value="Submit" />
+    <div id="content">
+        <h1>The Form Below Should Be Filled</h1>
+        <form onsubmit="ajaxCall(event)" enctype="multipart/form-data">
+            <h4>Club Details:</h4>
+            <p>
+                <label for="name">Club Name</label>
+                <input type="text" id="name" name="name" required>
+            </p>
+            <p>
+                <label for="handle">Handle</label>
+                <select id="handle">
+                    <option id="1">Backend</option>
+                    <option id="2">Frontend</option>
+                </select>
+            </p>
+            <p>
+                <label for="status">Status</label>
+                <select id="status">
+                    <option id="1">Active</option>
+                    <option id="2">Inactive</option>
+                </select>
+
+            </p>
+            <h4>User Details:</h4>
+            <p><label for="firstName">Enter your First name: </label>
+                <input id="firstName" id="firstName" name="firstName" required>
+            </p>
+
+            <p>
+                <label for="lastName">Enter your Last Name:</label>
+                <input type="text" name="lastName" id="lastName" required>
+            </p>
+
+            <p>
+                <label for="role"> User Role: </label>
+                <select id="role">
+                    <option id="1" value="user">User</option>
+                    <option id="2" value="admin">Admin</option>
+                    <option id="3" value="Moderator">Moderator</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="adminStatus">Admin Status: </label>
+                <select id="adminStatus">
+                    <option id="1" value="PENDING">Pending</option>
+                    <option id="2" value="COMPLETE">Complete</option>
+                    <option id="3" value="FAILED">Failed</option>
+                </select>
+            </p>
 
 
-    </form>
-    <div id="club_name"></div>
+            <input type="submit" name="submit" value="Submit" />
+
+
+        </form>
+        <div id="club_name"></div>
 
 
 
-    <script>
+        <script>
 
-        async function ajaxCall(event) {
-            event.preventDefault();
-            let name = document.getElementById('name').value;
-            let handle = document.getElementById('handle').value;
+            async function ajaxCall(event) {
+                event.preventDefault();
+                const name = document.getElementById('name').value;
+                const handle = document.getElementById('handle').value;
+                const status = document.getElementById('status').value;
+                const role = document.getElementById('role').value;
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const adminStatus = document.getElementById('adminStatus').value;
 
+                console.log("Updating")
 
-            console.log("Updating")
+                const response = await fetch(`/upData/3`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, handle, status, role, firstName, lastName, adminStatus })
+                }
+                );
 
-            const response = await fetch(`/upData/3`, {
-                method: 'PUT',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({ name, handle })
-            }
-            );
+                const data = await response.json();
+                console.log(data)
 
-            const data = await response.json();
-            console.log(data)
-
-            const div = document.getElementById('club_name');
-            const divClub = `
+                const div = document.getElementById('club_name');
+                const divClub = `
         <p>Message: ${data['message']}
             <p>Name: ${data.name}</p>
             <p>Handle: ${data.handle}</p>
+            <p>Status: ${data.status}</p>
+            <p> User Role: ${data.role}</p>
+            <p> First Name: ${data.firstName}</p>
+            <p>Last Name: ${data.lastName}</p>
+            <p>Admin Status: ${data['admin_status']}</p>
         `;
-            div.innerHTML += divClub;
-        }
+                div.innerHTML += divClub;
+            }
 
 
 
 
-    </script>
+        </script>
+    </div>
 </body>
 
 </html>
