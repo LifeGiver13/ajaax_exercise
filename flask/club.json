@@ -1,0 +1,49 @@
+[
+    {
+        "status": 200,
+        "data": {
+            "id": "3",
+            "name": "Yo",
+            "handle": "Good",
+            "type": "Default",
+            "status": "ACTIVE",
+            "verified": true,
+            "visibility": "PRIVATE",
+            "settings": [],
+            "dateCreated": "1649244621",
+            "lastUpdated": "1703181225",
+            "meta": [],
+            "profile": {
+                "description": "Here, all backend related discourses will happen.",
+                "picture": "https://res.cloudinary.com/demo/image/upload/v1703181220/istockph_mxipjt_1_iyyuvg.jpg"
+            },
+            "posts": 7,
+            "admins": [
+                {
+                    "id": "3",
+                    "clubId": "3",
+                    "role": "admin",
+                    "status": "PENDING",
+                    "dateJoined": "1649244621",
+                    "lastUpdated": null,
+                    "profile": [],
+                    "activities": [],
+                    "meta": [],
+                    "user": {
+                        "id": 4,
+                        "profile": {
+                            "firstName": "Idris Young",
+                            "gender": "male",
+                            "lastName": "Zubair",
+                            "location_city": "Lagos",
+                            "location_country": "NG",
+                            "picture": "https://res.cloudinary.com/ayudigital/image/upload/v1649243590/profile_picahhb0ti6.png"
+                        }
+                    }
+                }
+            ],
+            "members": 2,
+            "campaigns": 2
+        }
+    }
+]

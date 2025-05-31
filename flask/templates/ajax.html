@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Ajax Template</title>
+</head>
+
+<body>
+
+    <form>
+        <p>
+            <label for="name">UserName</label>
+            <input type="text" id="name" name="name" required>
+        </p>
+        <p><label for="handle">Handle</label>
+            <input id="handle" id="handle" name="handle" required>
+        </p>
+        <input type="submit" name="submit" value="Submit" onclick="ajaxCall()">
+
+
+    </form>
+    <p id="club_name"></p>
+
+
+
+    <script>
+
+
+
+
+
+        async function ajaxCall(id) {
+
+            const name = document.getElementById('name').value;
+            const handle = document.getElementById('handle').value;
+
+
+            console.log("Updating")
+
+            const response = await fetch(`/upData/3`, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ name, handle })
+            }
+            );
+
+            const data = await response.json();
+            console.log(data)
+
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
