@@ -7,7 +7,7 @@
 
 <body>
 
-    <form>
+    <form onsubmit="ajaxCall(event)">
         <p>
             <label for="name">UserName</label>
             <input type="text" id="name" name="name" required>
@@ -15,24 +15,20 @@
         <p><label for="handle">Handle</label>
             <input id="handle" id="handle" name="handle" required>
         </p>
-        <input type="submit" name="submit" value="Submit" onclick="ajaxCall()">
+        <input type="submit" name="submit" value="Submit" />
 
 
     </form>
-    <p id="club_name"></p>
+    <div id="club_name"></div>
 
 
 
     <script>
 
-
-
-
-
-        async function ajaxCall(id) {
-
-            const name = document.getElementById('name').value;
-            const handle = document.getElementById('handle').value;
+        async function ajaxCall(event) {
+            event.preventDefault();
+            let name = document.getElementById('name').value;
+            let handle = document.getElementById('handle').value;
 
 
             console.log("Updating")
@@ -49,9 +45,14 @@
             const data = await response.json();
             console.log(data)
 
+            const div = document.getElementById('club_name');
+            const divClub = `
+        <p>Message: ${data['message']}
+            <p>Name: ${data.name}</p>
+            <p>Handle: ${data.handle}</p>
+        `;
+            div.innerHTML += divClub;
         }
-
-
 
 
 
